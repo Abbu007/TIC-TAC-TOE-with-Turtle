@@ -1,0 +1,149 @@
+import sys
+import turtle
+
+inp=0
+count=1
+posi={'1':(50,50),'2':(150,50),'3':(250,50),'6':(250,150),'5':(150,150),'4':(50,150),'7':(50,250),'8':(150,250),'9':(250,250)}
+tur=turtle.Turtle()
+tur1=turtle.Turtle()
+won=[{0,1,2,3},{0,4,5,6},{0,7,8,9},{0,1,4,7},{0,2,5,8},{0,3,6,9},{0,1,5,9},{0,3,5,7}]
+xset={0}
+oset={0}
+
+def play():
+    global count
+    while(count<=9):
+        if(count%2==0):
+            inputt()
+            drawo(inp)
+            oset.add(int(inp))
+            print(oset)
+
+            count+=1
+          
+        else:
+            inputt()
+            drawx(inp)
+            xset.add(int(inp))
+            print(xset)
+
+            count+=1
+           
+def inputt():
+    global inp
+    global won
+    if(count%2==0):
+        result()
+        inp=input("enter ur choice for player 2 which is O")
+        if inp in posi.keys():
+            pass
+        else:
+            print("u delusional.....sahi type kar bro")
+            inputt()
+    elif(count%2!=0):
+        result()
+        inp=input("enter ur choice for player 1 which is X ")
+        if inp in posi.keys():
+            pass
+        else:
+            print("u delusional ,,,,sahi type kar bro ")
+            inputt()
+    else:
+        print("u delusional")
+        inputt()
+
+        
+
+def drawbg():
+    global abc
+    abc=turtle.Screen()
+    tur.forward(300)
+    tur.left(90)
+    tur.forward(300)
+    tur.left(90)
+    tur.forward(300)
+    tur.left(90)
+    tur.forward(300)
+    tur.left(180)
+    tur.forward(100)
+    tur.right(90)
+    tur.forward(300)
+    tur.left(90)
+    tur.forward(100)
+    tur.left(90)
+    tur.forward(300)
+    tur.right(90)
+    tur.forward(100)
+    tur.right(90)
+    tur.forward(100)
+    tur.right(90)
+    tur.forward(300)
+    tur.left(90)
+    tur.forward(100)
+    tur.left(90)
+    tur.forward(300)
+
+def drawx(x):
+    if(count==3) or (count==7):
+        tur1.penup()
+        tur1.goto(posi[x])
+        tur1.pendown()
+        tur1.left(90)
+        tur1.forward(40)
+        tur1.back(80)
+        tur1.forward(40)
+        tur1.left(90)
+        tur1.forward(40)
+        tur1.back(80)
+        tur1.right(45)
+        del posi[x]         
+    
+    else:
+        tur1.penup()
+        tur1.goto(posi[x])
+        tur1.pendown()
+        tur1.left(45)
+        tur1.forward(40)
+        tur1.back(80)
+        tur1.forward(40)
+        tur1.left(90)
+        tur1.forward(40)
+        tur1.back(80)
+        del posi[x] 
+
+def drawo(x):
+    tur1.penup()
+    tur1.goto(posi[x])
+    tur1.right(90)
+    tur1.forward(35)
+    tur1.left(90)
+    tur1.pendown()
+    tur1.circle(35)
+    del posi[x]
+
+def result():
+    for i in range(0,8):
+        if won[i].issubset(oset):
+            print("O won")
+            sys.exit()
+        elif won[i].issubset(xset):
+            print("X won")
+            sys.exit()
+
+
+drawbg()
+play()
+
+
+
+turtle.done()     
+
+
+
+    
+
+
+  
+
+
+
